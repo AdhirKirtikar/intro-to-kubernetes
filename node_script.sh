@@ -16,6 +16,11 @@ echo -e "iamadmin\niamadmin" | passwd root >/dev/null 2>&1
 sudo zypper --non-interactive update
 sudo zypper --non-interactive install docker
 
+sudo zypper --non-interactive install ufw
+# sudo systemctl reboot
+sudo systemctl daemon-reload 
+sudo ufw disable
+
 # Start and enable Services
 sudo systemctl daemon-reload 
 sudo systemctl enable docker
@@ -39,8 +44,6 @@ sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
 sudo swapoff -a
 
 # Turn off firewall
-ufw disable
-
 # Modify bridge adapter setting
 # Configure sysctl.
 sudo modprobe overlay
